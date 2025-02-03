@@ -1,51 +1,40 @@
 // ArrayFunctions.java
 
 import java.util.*;
-import java.util.Arrays;
 
-public class ArrayFunctions {
-    public void display(int[] array, String type) {
-        System.out.println(type + " numbers: " + Arrays.toString(array));
+class ArrayFunctions {
+    public void display(List<Integer> list, String type) {
+        System.out.println(type + " numbers: " + list);
     }
-	
-	public void oddEven(int[] array) {
-        int evenCount = 0, oddCount = 0;
+    
+	// Function to separate odd and even numbers
+    public void oddEven(List<Integer> list) {
+        List<Integer> even = new ArrayList<>();
+        List<Integer> odd = new ArrayList<>();
         
-        for (int num : array) {
+        for (int num : list) {
             if (num % 2 == 0) {
-                evenCount++;
+                even.add(num);
             } else {
-                oddCount++;
-            }
-        }
-        
-        int[] even = new int[evenCount];
-        int[] odd = new int[oddCount];
-        evenCount = 0;
-        oddCount = 0;
-        
-        for (int num : array) {
-            if (num % 2 == 0) {
-                even[evenCount++] = num;
-            } else {
-                odd[oddCount++] = num;
+                odd.add(num);
             }
         }
         
         display(even, "Even");
         display(odd, "Odd");
     }
-	
-	public int findSmallestDistance(int[] array) {
-        if (array.length < 2) {
+    
+	// Function to find the smallest distance
+    public int findSmallestDistance(List<Integer> list) {
+        if (list.size() < 2) {
             return -1;
         }
         
         int minIndex = 0;
-        int minDistance = Math.abs(array[1] - array[0]);
+        int minDistance = Math.abs(list.get(1) - list.get(0));
         
-        for (int i = 1; i < array.length - 1; i++) {
-            int distance = Math.abs(array[i + 1] - array[i]);
+        for (int i = 1; i < list.size() - 1; i++) {
+            int distance = Math.abs(list.get(i + 1) - list.get(i));
             if (distance < minDistance) {
                 minDistance = distance;
                 minIndex = i;
@@ -53,18 +42,15 @@ public class ArrayFunctions {
         }
         return minIndex;
     }
-	
-	public void convertArrayAndList(int[] array) {
-        List<Integer> arrayList = new ArrayList<>();
-        for (int num : array) {
-            arrayList.add(num);
-        }
-        System.out.println("Array converted to ArrayList: " + arrayList);
+    
+	// Function to convert array to array list and vice versa
+    public void convertArrayAndList(List<Integer> list) {
+        // Convert ArrayList to Array
+        Integer[] array = list.toArray(new Integer[0]);
+        System.out.println("ArrayList converted to Array: " + Arrays.toString(array));
         
-        int[] newArray = new int[arrayList.size()];
-        for (int i = 0; i < arrayList.size(); i++) {
-            newArray[i] = arrayList.get(i);
-        }
-        System.out.println("ArrayList converted back to Array: " + Arrays.toString(newArray));
+        // Convert Array back to ArrayList
+        List<Integer> newList = new ArrayList<>(Arrays.asList(array));
+        System.out.println("Array converted back to ArrayList: " + newList);
     }
 }
