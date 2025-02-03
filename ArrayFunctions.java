@@ -53,4 +53,18 @@ public class ArrayFunctions {
         }
         return minIndex;
     }
+	
+	public void convertArrayAndList(int[] array) {
+        List<Integer> arrayList = new ArrayList<>();
+        for (int num : array) {
+            arrayList.add(num);
+        }
+        System.out.println("Array converted to ArrayList: " + arrayList);
+        
+        int[] newArray = new int[arrayList.size()];
+        for (int i = 0; i < arrayList.size(); i++) {
+            newArray[i] = arrayList.get(i);
+        }
+        System.out.println("ArrayList converted back to Array: " + Arrays.toString(newArray));
+    }
 }
